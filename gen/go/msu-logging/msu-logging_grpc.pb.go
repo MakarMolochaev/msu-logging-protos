@@ -19,101 +19,101 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TranscribeServier_SendTranscribeResult_FullMethodName = "/msu_logging.TranscribeServier/SendTranscribeResult"
+	TranscribeServer_SendTranscribeResult_FullMethodName = "/msu_logging.TranscribeServer/SendTranscribeResult"
 )
 
-// TranscribeServierClient is the client API for TranscribeServier service.
+// TranscribeServerClient is the client API for TranscribeServer service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type TranscribeServierClient interface {
+type TranscribeServerClient interface {
 	SendTranscribeResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*TranscribeResult, error)
 }
 
-type transcribeServierClient struct {
+type transcribeServerClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewTranscribeServierClient(cc grpc.ClientConnInterface) TranscribeServierClient {
-	return &transcribeServierClient{cc}
+func NewTranscribeServerClient(cc grpc.ClientConnInterface) TranscribeServerClient {
+	return &transcribeServerClient{cc}
 }
 
-func (c *transcribeServierClient) SendTranscribeResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*TranscribeResult, error) {
+func (c *transcribeServerClient) SendTranscribeResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*TranscribeResult, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TranscribeResult)
-	err := c.cc.Invoke(ctx, TranscribeServier_SendTranscribeResult_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TranscribeServer_SendTranscribeResult_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// TranscribeServierServer is the server API for TranscribeServier service.
-// All implementations must embed UnimplementedTranscribeServierServer
+// TranscribeServerServer is the server API for TranscribeServer service.
+// All implementations must embed UnimplementedTranscribeServerServer
 // for forward compatibility.
-type TranscribeServierServer interface {
+type TranscribeServerServer interface {
 	SendTranscribeResult(context.Context, *Result) (*TranscribeResult, error)
-	mustEmbedUnimplementedTranscribeServierServer()
+	mustEmbedUnimplementedTranscribeServerServer()
 }
 
-// UnimplementedTranscribeServierServer must be embedded to have
+// UnimplementedTranscribeServerServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedTranscribeServierServer struct{}
+type UnimplementedTranscribeServerServer struct{}
 
-func (UnimplementedTranscribeServierServer) SendTranscribeResult(context.Context, *Result) (*TranscribeResult, error) {
+func (UnimplementedTranscribeServerServer) SendTranscribeResult(context.Context, *Result) (*TranscribeResult, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendTranscribeResult not implemented")
 }
-func (UnimplementedTranscribeServierServer) mustEmbedUnimplementedTranscribeServierServer() {}
-func (UnimplementedTranscribeServierServer) testEmbeddedByValue()                           {}
+func (UnimplementedTranscribeServerServer) mustEmbedUnimplementedTranscribeServerServer() {}
+func (UnimplementedTranscribeServerServer) testEmbeddedByValue()                          {}
 
-// UnsafeTranscribeServierServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to TranscribeServierServer will
+// UnsafeTranscribeServerServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TranscribeServerServer will
 // result in compilation errors.
-type UnsafeTranscribeServierServer interface {
-	mustEmbedUnimplementedTranscribeServierServer()
+type UnsafeTranscribeServerServer interface {
+	mustEmbedUnimplementedTranscribeServerServer()
 }
 
-func RegisterTranscribeServierServer(s grpc.ServiceRegistrar, srv TranscribeServierServer) {
-	// If the following call pancis, it indicates UnimplementedTranscribeServierServer was
+func RegisterTranscribeServerServer(s grpc.ServiceRegistrar, srv TranscribeServerServer) {
+	// If the following call pancis, it indicates UnimplementedTranscribeServerServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&TranscribeServier_ServiceDesc, srv)
+	s.RegisterService(&TranscribeServer_ServiceDesc, srv)
 }
 
-func _TranscribeServier_SendTranscribeResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TranscribeServer_SendTranscribeResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Result)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TranscribeServierServer).SendTranscribeResult(ctx, in)
+		return srv.(TranscribeServerServer).SendTranscribeResult(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TranscribeServier_SendTranscribeResult_FullMethodName,
+		FullMethod: TranscribeServer_SendTranscribeResult_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TranscribeServierServer).SendTranscribeResult(ctx, req.(*Result))
+		return srv.(TranscribeServerServer).SendTranscribeResult(ctx, req.(*Result))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// TranscribeServier_ServiceDesc is the grpc.ServiceDesc for TranscribeServier service.
+// TranscribeServer_ServiceDesc is the grpc.ServiceDesc for TranscribeServer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var TranscribeServier_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "msu_logging.TranscribeServier",
-	HandlerType: (*TranscribeServierServer)(nil),
+var TranscribeServer_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "msu_logging.TranscribeServer",
+	HandlerType: (*TranscribeServerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "SendTranscribeResult",
-			Handler:    _TranscribeServier_SendTranscribeResult_Handler,
+			Handler:    _TranscribeServer_SendTranscribeResult_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

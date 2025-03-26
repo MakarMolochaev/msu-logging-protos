@@ -4,7 +4,7 @@ package msu_logging;
 
 option go_package = "makarmolochaev.msu_logging.v1;msu_loggingv1";
 
-service TranscribeServier {
+service TranscribeServer {
     rpc SendTranscribeResult (Result) returns (TranscribeResult);
 }
 
