@@ -4,11 +4,11 @@ package msu_logging;
 
 option go_package = "makarmolochaev.msu_logging.v1;msu_loggingv1";
 
-service TranscribeServer {
+service Transcribe {
     rpc SendTranscribeResult (Result) returns (TranscribeResult);
 }
 
-service ProtocolServer {
+service Protocol {
     rpc SendProtocolResult (Result) returns (ProtocolResult);
 }
 

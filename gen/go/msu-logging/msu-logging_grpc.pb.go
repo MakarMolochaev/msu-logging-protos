@@ -19,101 +19,101 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TranscribeServer_SendTranscribeResult_FullMethodName = "/msu_logging.TranscribeServer/SendTranscribeResult"
+	Transcribe_SendTranscribeResult_FullMethodName = "/msu_logging.Transcribe/SendTranscribeResult"
 )
 
-// TranscribeServerClient is the client API for TranscribeServer service.
+// TranscribeClient is the client API for Transcribe service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type TranscribeServerClient interface {
+type TranscribeClient interface {
 	SendTranscribeResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*TranscribeResult, error)
 }
 
-type transcribeServerClient struct {
+type transcribeClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewTranscribeServerClient(cc grpc.ClientConnInterface) TranscribeServerClient {
-	return &transcribeServerClient{cc}
+func NewTranscribeClient(cc grpc.ClientConnInterface) TranscribeClient {
+	return &transcribeClient{cc}
 }
 
-func (c *transcribeServerClient) SendTranscribeResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*TranscribeResult, error) {
+func (c *transcribeClient) SendTranscribeResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*TranscribeResult, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TranscribeResult)
-	err := c.cc.Invoke(ctx, TranscribeServer_SendTranscribeResult_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Transcribe_SendTranscribeResult_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// TranscribeServerServer is the server API for TranscribeServer service.
-// All implementations must embed UnimplementedTranscribeServerServer
+// TranscribeServer is the server API for Transcribe service.
+// All implementations must embed UnimplementedTranscribeServer
 // for forward compatibility.
-type TranscribeServerServer interface {
+type TranscribeServer interface {
 	SendTranscribeResult(context.Context, *Result) (*TranscribeResult, error)
-	mustEmbedUnimplementedTranscribeServerServer()
+	mustEmbedUnimplementedTranscribeServer()
 }
 
-// UnimplementedTranscribeServerServer must be embedded to have
+// UnimplementedTranscribeServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedTranscribeServerServer struct{}
+type UnimplementedTranscribeServer struct{}
 
-func (UnimplementedTranscribeServerServer) SendTranscribeResult(context.Context, *Result) (*TranscribeResult, error) {
+func (UnimplementedTranscribeServer) SendTranscribeResult(context.Context, *Result) (*TranscribeResult, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendTranscribeResult not implemented")
 }
-func (UnimplementedTranscribeServerServer) mustEmbedUnimplementedTranscribeServerServer() {}
-func (UnimplementedTranscribeServerServer) testEmbeddedByValue()                          {}
+func (UnimplementedTranscribeServer) mustEmbedUnimplementedTranscribeServer() {}
+func (UnimplementedTranscribeServer) testEmbeddedByValue()                    {}
 
-// UnsafeTranscribeServerServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to TranscribeServerServer will
+// UnsafeTranscribeServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TranscribeServer will
 // result in compilation errors.
-type UnsafeTranscribeServerServer interface {
-	mustEmbedUnimplementedTranscribeServerServer()
+type UnsafeTranscribeServer interface {
+	mustEmbedUnimplementedTranscribeServer()
 }
 
-func RegisterTranscribeServerServer(s grpc.ServiceRegistrar, srv TranscribeServerServer) {
-	// If the following call pancis, it indicates UnimplementedTranscribeServerServer was
+func RegisterTranscribeServer(s grpc.ServiceRegistrar, srv TranscribeServer) {
+	// If the following call pancis, it indicates UnimplementedTranscribeServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&TranscribeServer_ServiceDesc, srv)
+	s.RegisterService(&Transcribe_ServiceDesc, srv)
 }
 
-func _TranscribeServer_SendTranscribeResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Transcribe_SendTranscribeResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Result)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TranscribeServerServer).SendTranscribeResult(ctx, in)
+		return srv.(TranscribeServer).SendTranscribeResult(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TranscribeServer_SendTranscribeResult_FullMethodName,
+		FullMethod: Transcribe_SendTranscribeResult_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TranscribeServerServer).SendTranscribeResult(ctx, req.(*Result))
+		return srv.(TranscribeServer).SendTranscribeResult(ctx, req.(*Result))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// TranscribeServer_ServiceDesc is the grpc.ServiceDesc for TranscribeServer service.
+// Transcribe_ServiceDesc is the grpc.ServiceDesc for Transcribe service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var TranscribeServer_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "msu_logging.TranscribeServer",
-	HandlerType: (*TranscribeServerServer)(nil),
+var Transcribe_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "msu_logging.Transcribe",
+	HandlerType: (*TranscribeServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "SendTranscribeResult",
-			Handler:    _TranscribeServer_SendTranscribeResult_Handler,
+			Handler:    _Transcribe_SendTranscribeResult_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -121,101 +121,101 @@ var TranscribeServer_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProtocolServer_SendProtocolResult_FullMethodName = "/msu_logging.ProtocolServer/SendProtocolResult"
+	Protocol_SendProtocolResult_FullMethodName = "/msu_logging.Protocol/SendProtocolResult"
 )
 
-// ProtocolServerClient is the client API for ProtocolServer service.
+// ProtocolClient is the client API for Protocol service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ProtocolServerClient interface {
+type ProtocolClient interface {
 	SendProtocolResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*ProtocolResult, error)
 }
 
-type protocolServerClient struct {
+type protocolClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewProtocolServerClient(cc grpc.ClientConnInterface) ProtocolServerClient {
-	return &protocolServerClient{cc}
+func NewProtocolClient(cc grpc.ClientConnInterface) ProtocolClient {
+	return &protocolClient{cc}
 }
 
-func (c *protocolServerClient) SendProtocolResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*ProtocolResult, error) {
+func (c *protocolClient) SendProtocolResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*ProtocolResult, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ProtocolResult)
-	err := c.cc.Invoke(ctx, ProtocolServer_SendProtocolResult_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Protocol_SendProtocolResult_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ProtocolServerServer is the server API for ProtocolServer service.
-// All implementations must embed UnimplementedProtocolServerServer
+// ProtocolServer is the server API for Protocol service.
+// All implementations must embed UnimplementedProtocolServer
 // for forward compatibility.
-type ProtocolServerServer interface {
+type ProtocolServer interface {
 	SendProtocolResult(context.Context, *Result) (*ProtocolResult, error)
-	mustEmbedUnimplementedProtocolServerServer()
+	mustEmbedUnimplementedProtocolServer()
 }
 
-// UnimplementedProtocolServerServer must be embedded to have
+// UnimplementedProtocolServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedProtocolServerServer struct{}
+type UnimplementedProtocolServer struct{}
 
-func (UnimplementedProtocolServerServer) SendProtocolResult(context.Context, *Result) (*ProtocolResult, error) {
+func (UnimplementedProtocolServer) SendProtocolResult(context.Context, *Result) (*ProtocolResult, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendProtocolResult not implemented")
 }
-func (UnimplementedProtocolServerServer) mustEmbedUnimplementedProtocolServerServer() {}
-func (UnimplementedProtocolServerServer) testEmbeddedByValue()                        {}
+func (UnimplementedProtocolServer) mustEmbedUnimplementedProtocolServer() {}
+func (UnimplementedProtocolServer) testEmbeddedByValue()                  {}
 
-// UnsafeProtocolServerServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ProtocolServerServer will
+// UnsafeProtocolServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProtocolServer will
 // result in compilation errors.
-type UnsafeProtocolServerServer interface {
-	mustEmbedUnimplementedProtocolServerServer()
+type UnsafeProtocolServer interface {
+	mustEmbedUnimplementedProtocolServer()
 }
 
-func RegisterProtocolServerServer(s grpc.ServiceRegistrar, srv ProtocolServerServer) {
-	// If the following call pancis, it indicates UnimplementedProtocolServerServer was
+func RegisterProtocolServer(s grpc.ServiceRegistrar, srv ProtocolServer) {
+	// If the following call pancis, it indicates UnimplementedProtocolServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ProtocolServer_ServiceDesc, srv)
+	s.RegisterService(&Protocol_ServiceDesc, srv)
 }
 
-func _ProtocolServer_SendProtocolResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Protocol_SendProtocolResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Result)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProtocolServerServer).SendProtocolResult(ctx, in)
+		return srv.(ProtocolServer).SendProtocolResult(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProtocolServer_SendProtocolResult_FullMethodName,
+		FullMethod: Protocol_SendProtocolResult_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProtocolServerServer).SendProtocolResult(ctx, req.(*Result))
+		return srv.(ProtocolServer).SendProtocolResult(ctx, req.(*Result))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ProtocolServer_ServiceDesc is the grpc.ServiceDesc for ProtocolServer service.
+// Protocol_ServiceDesc is the grpc.ServiceDesc for Protocol service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ProtocolServer_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "msu_logging.ProtocolServer",
-	HandlerType: (*ProtocolServerServer)(nil),
+var Protocol_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "msu_logging.Protocol",
+	HandlerType: (*ProtocolServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "SendProtocolResult",
-			Handler:    _ProtocolServer_SendProtocolResult_Handler,
+			Handler:    _Protocol_SendProtocolResult_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

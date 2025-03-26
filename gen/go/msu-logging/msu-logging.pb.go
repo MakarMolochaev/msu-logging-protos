@@ -199,10 +199,11 @@ const file_msu_logging_msu_logging_proto_rawDesc = "" +
 	"\ferrorMessage\x18\x02 \x01(\tR\ferrorMessage\x12\x16\n" +
 	"\x06result\x18\x03 \x01(\tR\x06result\"\"\n" +
 	"\x06Result\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2^\n" +
-	"\x10TranscribeServer\x12J\n" +
-	"\x14SendTranscribeResult\x12\x13.msu_logging.Result\x1a\x1d.msu_logging.TranscribeResult2X\n" +
-	"\x0eProtocolServer\x12F\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2X\n" +
+	"\n" +
+	"Transcribe\x12J\n" +
+	"\x14SendTranscribeResult\x12\x13.msu_logging.Result\x1a\x1d.msu_logging.TranscribeResult2R\n" +
+	"\bProtocol\x12F\n" +
 	"\x12SendProtocolResult\x12\x13.msu_logging.Result\x1a\x1b.msu_logging.ProtocolResultB-Z+makarmolochaev.msu_logging.v1;msu_loggingv1b\x06proto3"
 
 var (
@@ -224,10 +225,10 @@ var file_msu_logging_msu_logging_proto_goTypes = []any{
 	(*Result)(nil),           // 2: msu_logging.Result
 }
 var file_msu_logging_msu_logging_proto_depIdxs = []int32{
-	2, // 0: msu_logging.TranscribeServer.SendTranscribeResult:input_type -> msu_logging.Result
-	2, // 1: msu_logging.ProtocolServer.SendProtocolResult:input_type -> msu_logging.Result
-	0, // 2: msu_logging.TranscribeServer.SendTranscribeResult:output_type -> msu_logging.TranscribeResult
-	1, // 3: msu_logging.ProtocolServer.SendProtocolResult:output_type -> msu_logging.ProtocolResult
+	2, // 0: msu_logging.Transcribe.SendTranscribeResult:input_type -> msu_logging.Result
+	2, // 1: msu_logging.Protocol.SendProtocolResult:input_type -> msu_logging.Result
+	0, // 2: msu_logging.Transcribe.SendTranscribeResult:output_type -> msu_logging.TranscribeResult
+	1, // 3: msu_logging.Protocol.SendProtocolResult:output_type -> msu_logging.ProtocolResult
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
