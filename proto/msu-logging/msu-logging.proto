@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package msu_logging;
+
+option go_package = "makarmolochaev.msu_logging.v1;msu_loggingv1";
+
+service TranscribeServier {
+    rpc SendTranscribeResult (Result) returns (TranscribeResult);
+}
+
+service ProtocolServer {
+    rpc SendProtocolResult (Result) returns (ProtocolResult);
+}
+
+message TranscribeResult {
+    bool success = 1;
+    string errorMessage = 2;
+    string result = 3;
+}
+
+message ProtocolResult {
+    bool success = 1;
+    string errorMessage = 2;
+    string result = 3;
+}
+
+
+message Result {
+    bool success = 1;
+}
