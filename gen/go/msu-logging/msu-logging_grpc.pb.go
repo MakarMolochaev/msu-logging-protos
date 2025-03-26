@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TranscribeClient interface {
-	SendTranscribeResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*TranscribeResult, error)
+	SendTranscribeResult(ctx context.Context, in *TranscribeResult, opts ...grpc.CallOption) (*Result, error)
 }
 
 type transcribeClient struct {
@@ -37,9 +37,9 @@ func NewTranscribeClient(cc grpc.ClientConnInterface) TranscribeClient {
 	return &transcribeClient{cc}
 }
 
-func (c *transcribeClient) SendTranscribeResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*TranscribeResult, error) {
+func (c *transcribeClient) SendTranscribeResult(ctx context.Context, in *TranscribeResult, opts ...grpc.CallOption) (*Result, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(TranscribeResult)
+	out := new(Result)
 	err := c.cc.Invoke(ctx, Transcribe_SendTranscribeResult_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (c *transcribeClient) SendTranscribeResult(ctx context.Context, in *Result,
 // All implementations must embed UnimplementedTranscribeServer
 // for forward compatibility.
 type TranscribeServer interface {
-	SendTranscribeResult(context.Context, *Result) (*TranscribeResult, error)
+	SendTranscribeResult(context.Context, *TranscribeResult) (*Result, error)
 	mustEmbedUnimplementedTranscribeServer()
 }
 
@@ -62,7 +62,7 @@ type TranscribeServer interface {
 // pointer dereference when methods are called.
 type UnimplementedTranscribeServer struct{}
 
-func (UnimplementedTranscribeServer) SendTranscribeResult(context.Context, *Result) (*TranscribeResult, error) {
+func (UnimplementedTranscribeServer) SendTranscribeResult(context.Context, *TranscribeResult) (*Result, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendTranscribeResult not implemented")
 }
 func (UnimplementedTranscribeServer) mustEmbedUnimplementedTranscribeServer() {}
@@ -87,7 +87,7 @@ func RegisterTranscribeServer(s grpc.ServiceRegistrar, srv TranscribeServer) {
 }
 
 func _Transcribe_SendTranscribeResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Result)
+	in := new(TranscribeResult)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ func _Transcribe_SendTranscribeResult_Handler(srv interface{}, ctx context.Conte
 		FullMethod: Transcribe_SendTranscribeResult_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TranscribeServer).SendTranscribeResult(ctx, req.(*Result))
+		return srv.(TranscribeServer).SendTranscribeResult(ctx, req.(*TranscribeResult))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -128,7 +128,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProtocolClient interface {
-	SendProtocolResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*ProtocolResult, error)
+	SendProtocolResult(ctx context.Context, in *ProtocolResult, opts ...grpc.CallOption) (*Result, error)
 }
 
 type protocolClient struct {
@@ -139,9 +139,9 @@ func NewProtocolClient(cc grpc.ClientConnInterface) ProtocolClient {
 	return &protocolClient{cc}
 }
 
-func (c *protocolClient) SendProtocolResult(ctx context.Context, in *Result, opts ...grpc.CallOption) (*ProtocolResult, error) {
+func (c *protocolClient) SendProtocolResult(ctx context.Context, in *ProtocolResult, opts ...grpc.CallOption) (*Result, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ProtocolResult)
+	out := new(Result)
 	err := c.cc.Invoke(ctx, Protocol_SendProtocolResult_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -153,7 +153,7 @@ func (c *protocolClient) SendProtocolResult(ctx context.Context, in *Result, opt
 // All implementations must embed UnimplementedProtocolServer
 // for forward compatibility.
 type ProtocolServer interface {
-	SendProtocolResult(context.Context, *Result) (*ProtocolResult, error)
+	SendProtocolResult(context.Context, *ProtocolResult) (*Result, error)
 	mustEmbedUnimplementedProtocolServer()
 }
 
@@ -164,7 +164,7 @@ type ProtocolServer interface {
 // pointer dereference when methods are called.
 type UnimplementedProtocolServer struct{}
 
-func (UnimplementedProtocolServer) SendProtocolResult(context.Context, *Result) (*ProtocolResult, error) {
+func (UnimplementedProtocolServer) SendProtocolResult(context.Context, *ProtocolResult) (*Result, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendProtocolResult not implemented")
 }
 func (UnimplementedProtocolServer) mustEmbedUnimplementedProtocolServer() {}
@@ -189,7 +189,7 @@ func RegisterProtocolServer(s grpc.ServiceRegistrar, srv ProtocolServer) {
 }
 
 func _Protocol_SendProtocolResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Result)
+	in := new(ProtocolResult)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -201,7 +201,7 @@ func _Protocol_SendProtocolResult_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: Protocol_SendProtocolResult_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProtocolServer).SendProtocolResult(ctx, req.(*Result))
+		return srv.(ProtocolServer).SendProtocolResult(ctx, req.(*ProtocolResult))
 	}
 	return interceptor(ctx, in, info, handler)
 }
