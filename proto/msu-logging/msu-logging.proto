@@ -16,15 +16,18 @@ message TranscribeResult {
     bool success = 1;
     string errorMessage = 2;
     string result = 3;
+    int32 taskId = 4;
 }
 
 message ProtocolResult {
     bool success = 1;
     string errorMessage = 2;
     string result = 3;
+    int32 taskId = 4;
 }
 
 
 message Result {
     bool success = 1;
+    string errorMessage = 2;
 }

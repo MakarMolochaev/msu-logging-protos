@@ -26,6 +26,7 @@ type TranscribeResult struct {
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	ErrorMessage  string                 `protobuf:"bytes,2,opt,name=errorMessage,proto3" json:"errorMessage,omitempty"`
 	Result        string                 `protobuf:"bytes,3,opt,name=result,proto3" json:"result,omitempty"`
+	TaskId        int32                  `protobuf:"varint,4,opt,name=taskId,proto3" json:"taskId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -81,11 +82,19 @@ func (x *TranscribeResult) GetResult() string {
 	return ""
 }
 
+func (x *TranscribeResult) GetTaskId() int32 {
+	if x != nil {
+		return x.TaskId
+	}
+	return 0
+}
+
 type ProtocolResult struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	ErrorMessage  string                 `protobuf:"bytes,2,opt,name=errorMessage,proto3" json:"errorMessage,omitempty"`
 	Result        string                 `protobuf:"bytes,3,opt,name=result,proto3" json:"result,omitempty"`
+	TaskId        int32                  `protobuf:"varint,4,opt,name=taskId,proto3" json:"taskId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -141,9 +150,17 @@ func (x *ProtocolResult) GetResult() string {
 	return ""
 }
 
+func (x *ProtocolResult) GetTaskId() int32 {
+	if x != nil {
+		return x.TaskId
+	}
+	return 0
+}
+
 type Result struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	ErrorMessage  string                 `protobuf:"bytes,2,opt,name=errorMessage,proto3" json:"errorMessage,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -185,21 +202,31 @@ func (x *Result) GetSuccess() bool {
 	return false
 }
 
+func (x *Result) GetErrorMessage() string {
+	if x != nil {
+		return x.ErrorMessage
+	}
+	return ""
+}
+
 var File_msu_logging_msu_logging_proto protoreflect.FileDescriptor
 
 const file_msu_logging_msu_logging_proto_rawDesc = "" +
 	"\n" +
-	"\x1dmsu-logging/msu-logging.proto\x12\vmsu_logging\"h\n" +
+	"\x1dmsu-logging/msu-logging.proto\x12\vmsu_logging\"\x80\x01\n" +
 	"\x10TranscribeResult\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\"\n" +
 	"\ferrorMessage\x18\x02 \x01(\tR\ferrorMessage\x12\x16\n" +
-	"\x06result\x18\x03 \x01(\tR\x06result\"f\n" +
+	"\x06result\x18\x03 \x01(\tR\x06result\x12\x16\n" +
+	"\x06taskId\x18\x04 \x01(\x05R\x06taskId\"~\n" +
 	"\x0eProtocolResult\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\"\n" +
 	"\ferrorMessage\x18\x02 \x01(\tR\ferrorMessage\x12\x16\n" +
-	"\x06result\x18\x03 \x01(\tR\x06result\"\"\n" +
+	"\x06result\x18\x03 \x01(\tR\x06result\x12\x16\n" +
+	"\x06taskId\x18\x04 \x01(\x05R\x06taskId\"F\n" +
 	"\x06Result\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2X\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\"\n" +
+	"\ferrorMessage\x18\x02 \x01(\tR\ferrorMessage2X\n" +
 	"\n" +
 	"Transcribe\x12J\n" +
 	"\x14SendTranscribeResult\x12\x1d.msu_logging.TranscribeResult\x1a\x13.msu_logging.Result2R\n" +
