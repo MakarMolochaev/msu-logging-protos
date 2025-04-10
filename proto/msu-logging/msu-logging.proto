@@ -23,7 +23,8 @@ message ProtocolResult {
     bool success = 1;
     string errorMessage = 2;
     string result = 3;
-    int32 taskId = 4;
+    string shortResult = 4;
+    int32 taskId = 5;
 }
 
 

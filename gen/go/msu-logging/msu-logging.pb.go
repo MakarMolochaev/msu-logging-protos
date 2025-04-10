@@ -94,7 +94,8 @@ type ProtocolResult struct {
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	ErrorMessage  string                 `protobuf:"bytes,2,opt,name=errorMessage,proto3" json:"errorMessage,omitempty"`
 	Result        string                 `protobuf:"bytes,3,opt,name=result,proto3" json:"result,omitempty"`
-	TaskId        int32                  `protobuf:"varint,4,opt,name=taskId,proto3" json:"taskId,omitempty"`
+	ShortResult   string                 `protobuf:"bytes,4,opt,name=shortResult,proto3" json:"shortResult,omitempty"`
+	TaskId        int32                  `protobuf:"varint,5,opt,name=taskId,proto3" json:"taskId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -146,6 +147,13 @@ func (x *ProtocolResult) GetErrorMessage() string {
 func (x *ProtocolResult) GetResult() string {
 	if x != nil {
 		return x.Result
+	}
+	return ""
+}
+
+func (x *ProtocolResult) GetShortResult() string {
+	if x != nil {
+		return x.ShortResult
 	}
 	return ""
 }
@@ -218,12 +226,13 @@ const file_msu_logging_msu_logging_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\"\n" +
 	"\ferrorMessage\x18\x02 \x01(\tR\ferrorMessage\x12\x16\n" +
 	"\x06result\x18\x03 \x01(\tR\x06result\x12\x16\n" +
-	"\x06taskId\x18\x04 \x01(\x05R\x06taskId\"~\n" +
+	"\x06taskId\x18\x04 \x01(\x05R\x06taskId\"\xa0\x01\n" +
 	"\x0eProtocolResult\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\"\n" +
 	"\ferrorMessage\x18\x02 \x01(\tR\ferrorMessage\x12\x16\n" +
-	"\x06result\x18\x03 \x01(\tR\x06result\x12\x16\n" +
-	"\x06taskId\x18\x04 \x01(\x05R\x06taskId\"F\n" +
+	"\x06result\x18\x03 \x01(\tR\x06result\x12 \n" +
+	"\vshortResult\x18\x04 \x01(\tR\vshortResult\x12\x16\n" +
+	"\x06taskId\x18\x05 \x01(\x05R\x06taskId\"F\n" +
 	"\x06Result\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\"\n" +
 	"\ferrorMessage\x18\x02 \x01(\tR\ferrorMessage2X\n" +
